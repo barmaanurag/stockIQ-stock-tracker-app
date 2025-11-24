@@ -137,3 +137,25 @@ export const getFormattedTodayDate = () => new Date().toLocaleDateString('en-US'
   day: 'numeric',
   timeZone: 'UTC',
 });
+
+export function generateGradient(name: string) {
+  const gradients = [
+    ["from-pink-500", "to-yellow-500"],
+    ["from-blue-500", "to-purple-500"],
+    ["from-green-500", "to-emerald-600"],
+    ["from-orange-500", "to-red-500"],
+    ["from-teal-500", "to-cyan-500"],
+    ["from-indigo-500", "to-purple-600"],
+    ["from-rose-500", "to-pink-600"],
+    ["from-lime-500", "to-green-600"],
+  ];
+
+  // Create deterministic hash
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  const index = Math.abs(hash) % gradients.length;
+  return gradients[index];
+}
